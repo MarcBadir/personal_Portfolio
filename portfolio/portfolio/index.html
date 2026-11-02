@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your Name – Developer Portfolio</title>
-  <meta name="description" content="Portfolio of Your Name: projects, skills and contact details.">
+  <title>Marc Bishara - Embedded Systems Engineer</title>
+  <meta name="description" content="Marc Bishara, engineering student and application engineer apprentice at STMicroelectronics. Projects in embedded systems, electronics, and software.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,10 +14,12 @@
 <body>
   <a class="skip" href="#work">Skip to projects</a>
   <header class="top">
-    <a class="mark" href="#top">YN</a>
+    <a class="mark" href="#top" aria-label="Marc Bishara, home">MB</a>
     <nav aria-label="Main">
+      <a href="#experience">Experience</a>
       <a href="#work">Projects</a>
       <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -25,12 +27,17 @@
 
   <main id="top">
     <section class="hero">
-      <h1 id="typed" aria-label="I build things that work.">I build things that work.</h1>
-      <p class="lede">Hi, I'm <strong>Your Name</strong>, a software developer based in Paris. I design and ship web apps, from the database to the button.</p>
+      <h1 id="typed"></h1>
+      <p class="lede" id="summary"></p>
       <p class="cta">
-        <a class="btn" href="#work">See my projects</a>
+        <a class="btn" href="#work">Explore my projects</a>
         <a class="btn ghost" href="#contact">Get in touch</a>
       </p>
+    </section>
+
+    <section id="experience" class="block">
+      <h2>Experience</h2>
+      <div class="entry-list" id="experienceList"></div>
     </section>
 
     <section id="work" class="block">
@@ -46,18 +53,36 @@
 
     <section id="about" class="block narrow">
       <h2>About</h2>
-      <p>Write two or three short paragraphs here. Say what you do, what you care about when you build, and what you are looking for next.</p>
-      <p>Mention anything that shows range: a degree, a community you help run, a talk you gave, a hobby that feeds your work.</p>
+      <p id="aboutText"></p>
+    </section>
+
+    <section id="education" class="block">
+      <h2>Education</h2>
+      <div class="entry-list" id="educationList"></div>
+    </section>
+
+    <section id="languages" class="block">
+      <h2>Languages and interests</h2>
+      <div class="skills">
+        <div>
+          <h3>Languages</h3>
+          <ul class="plain-list" id="languageList"></ul>
+        </div>
+        <div>
+          <h3>Interests</h3>
+          <ul class="plain-list" id="interestList"></ul>
+        </div>
+      </div>
     </section>
 
     <section id="contact" class="block narrow">
       <h2>Contact</h2>
-      <p>I'm open to freelance work and full-time roles. The fastest way to reach me is email.</p>
+      <p id="contactNote"></p>
       <p class="links" id="links"></p>
     </section>
   </main>
 
-  <footer><p>© <span id="year"></span> Your Name</p></footer>
+  <footer><p>© <span id="year"></span> Marc Bishara</p></footer>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

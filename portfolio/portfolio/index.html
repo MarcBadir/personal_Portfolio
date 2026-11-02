@@ -16,13 +16,17 @@
   <header class="top">
     <a class="mark" href="#top" aria-label="Marc Bishara, home">MB</a>
     <nav aria-label="Main">
-      <a href="#experience">Experience</a>
-      <a href="#work">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a id="experienceNav" href="#experience">Experience</a>
+      <a id="projectsNav" href="#work">Projects</a>
+      <a id="skillsNav" href="#skills">Skills</a>
+      <a id="educationNav" href="#education">Education</a>
+      <a id="aboutNav" href="#about">About</a>
+      <a id="contactNav" href="#contact">Contact</a>
     </nav>
+    <div class="language-switch" role="group" aria-label="Language">
+      <button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button>
+      <button type="button" data-language="fr" aria-pressed="false" aria-label="Français">FR</button>
+    </div>
   </header>
 
   <main id="top">
@@ -30,53 +34,53 @@
       <h1 id="typed"></h1>
       <p class="lede" id="summary"></p>
       <p class="cta">
-        <a class="btn" href="#work">Explore my projects</a>
-        <a class="btn ghost" href="#contact">Get in touch</a>
+        <a class="btn" id="heroProjects" href="#work">Explore my projects</a>
+        <a class="btn ghost" id="heroContact" href="#contact">Get in touch</a>
       </p>
     </section>
 
     <section id="experience" class="block">
-      <h2>Experience</h2>
+      <h2 id="experienceTitle">Experience</h2>
       <div class="entry-list" id="experienceList"></div>
     </section>
 
     <section id="work" class="block">
-      <h2>Projects</h2>
+      <h2 id="projectsTitle">Projects</h2>
       <div class="filters" id="filters" role="group" aria-label="Filter projects by technology"></div>
       <div class="grid" id="projects"></div>
     </section>
 
     <section id="skills" class="block">
-      <h2>Skills</h2>
+      <h2 id="skillsTitle">Skills</h2>
       <div class="skills" id="skillList"></div>
     </section>
 
     <section id="about" class="block narrow">
-      <h2>About</h2>
+      <h2 id="aboutTitle">About</h2>
       <p id="aboutText"></p>
     </section>
 
     <section id="education" class="block">
-      <h2>Education</h2>
+      <h2 id="educationTitle">Education</h2>
       <div class="entry-list" id="educationList"></div>
     </section>
 
     <section id="languages" class="block">
-      <h2>Languages and interests</h2>
+      <h2 id="languagesTitle">Languages and interests</h2>
       <div class="skills">
         <div>
-          <h3>Languages</h3>
+          <h3 id="languageHeading">Languages</h3>
           <ul class="plain-list" id="languageList"></ul>
         </div>
         <div>
-          <h3>Interests</h3>
+          <h3 id="interestsHeading">Interests</h3>
           <ul class="plain-list" id="interestList"></ul>
         </div>
       </div>
     </section>
 
     <section id="contact" class="block narrow">
-      <h2>Contact</h2>
+      <h2 id="contactTitle">Contact</h2>
       <p id="contactNote"></p>
       <p class="links" id="links"></p>
     </section>

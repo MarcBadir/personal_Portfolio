@@ -18,6 +18,9 @@ a{color:inherit}
 .mark{font:800 1.2rem var(--head);text-decoration:none;color:var(--accent)}
 nav{display:flex;gap:1.4rem;font:500 1rem var(--head)}
 nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--ink)}
+.language-switch{display:flex;flex:none;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.language-switch button{font:700 .8rem var(--head);padding:.35rem .5rem;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.language-switch button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 
 main{padding:0 clamp(1rem,5vw,4rem)}
 .hero{min-height:78vh;display:flex;flex-direction:column;justify-content:center;max-width:62rem}
@@ -66,7 +69,8 @@ h2{font:800 clamp(1.8rem,4vw,2.6rem) var(--head);letter-spacing:-.02em;margin:0 
 footer{padding:2rem clamp(1rem,5vw,4rem);color:var(--muted);border-top:1px solid var(--line)}
 
 @media (max-width:560px){
-  nav{max-width:calc(100vw - 5rem);gap:.65rem;font-size:.85rem;overflow-x:auto;white-space:nowrap}
+  .top{gap:.65rem}
+  nav{flex:1;min-width:0;max-width:none;gap:.65rem;font-size:.85rem;overflow-x:auto;white-space:nowrap}
   .entry-header{align-items:flex-start;flex-wrap:wrap;gap:.3rem .8rem}
   .entry-date{flex-basis:100%;white-space:normal}
 }

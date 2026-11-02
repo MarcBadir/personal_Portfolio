@@ -5,41 +5,56 @@ const el = (tag, props = {}, kids = []) => {
   return n;
 };
 
-// Projects + tag filter
-const tags = ["All", ...new Set(PROJECTS.flatMap((p) => p.tags))];
-let active = "All";
+const TAGS = ["All", ...new Set(PROJECT_TAGS.flat())];
+const TAG_LABELS_FR = {
+  All: CONTENT.fr.allProjects,
+  Electronics: "Électronique",
+  "Functional programming": "Programmation fonctionnelle",
+  Algorithms: "Algorithmes"
+};
+let language = "en";
+let activeTag = "All";
 
-function renderProjects() {
+try {
+  language = localStorage.getItem("portfolio-language") === "fr" ? "fr" : "en";
+} catch {}
+
+function renderFilters(content) {
+  const filters = $("#filters");
+  filters.setAttribute("aria-label", content.projectFilterLabel);
+  filters.replaceChildren(...TAGS.map((tag) => {
+    const label = language === "fr" ? TAG_LABELS_FR[tag] || tag : tag;
+    const button = el("button", { className: "chip", type: "button", textContent: label });
+    button.setAttribute("aria-pressed", tag === activeTag);
+    button.onclick = () => {
+      activeTag = tag;
+      renderFilters(CONTENT[language]);
+      renderProjects(CONTENT[language]);
+    };
+    return button;
+  }));
+}
+
+function renderProjects(content) {
   const box = $("#projects");
   box.replaceChildren();
-  PROJECTS.filter((p) => active === "All" || p.tags.includes(active)).forEach((p) => {
-    const row = el("div", { className: "row" });
-    if (p.demo) row.append(el("a", { href: p.demo, target: "_blank", rel: "noopener", textContent: "Live demo" }));
-    if (p.code) row.append(el("a", { href: p.code, target: "_blank", rel: "noopener", textContent: "Source code" }));
-    const heading = el("div", { className: "entry-header" }, [el("h3", { textContent: p.title })]);
-    if (p.date) heading.append(el("span", { className: "entry-date", textContent: p.date }));
+  content.projects.forEach((project, index) => {
+    const tags = PROJECT_TAGS[index];
+    if (activeTag !== "All" && !tags.includes(activeTag)) return;
+    const heading = el("div", { className: "entry-header" }, [el("h3", { textContent: project.title })]);
+    heading.append(el("span", { className: "entry-date", textContent: project.date }));
     box.append(el("article", { className: "card" }, [
       heading,
-      el("p", { textContent: p.description }),
-      el("ul", { className: "tags" }, p.tags.map((t) => el("li", { textContent: t }))),
-      row
+      el("p", { textContent: project.description }),
+      el("ul", { className: "tags" }, tags.map((tag) => el("li", {
+        textContent: language === "fr" ? TAG_LABELS_FR[tag] || tag : tag
+      })))
     ]));
   });
 }
 
-function renderFilters() {
-  const f = $("#filters");
-  f.replaceChildren(...tags.map((t) => {
-    const b = el("button", { className: "chip", type: "button", textContent: t });
-    b.setAttribute("aria-pressed", t === active);
-    b.onclick = () => { active = t; renderFilters(); renderProjects(); };
-    return b;
-  }));
-}
-
-function renderExperience() {
-  const list = $("#experienceList");
-  list.replaceChildren(...EXPERIENCE.map((item) => el("article", { className: "entry" }, [
+function renderExperience(content) {
+  $("#experienceList").replaceChildren(...content.experience.map((item) => el("article", { className: "entry" }, [
     el("div", { className: "entry-header" }, [
       el("h3", { textContent: item.company }),
       el("span", { className: "entry-date", textContent: item.date })
@@ -49,42 +64,96 @@ function renderExperience() {
   ])));
 }
 
-function renderEducation() {
-  const list = $("#educationList");
-  list.replaceChildren(...EDUCATION.map((item) => el("article", { className: "entry" }, [
-    el("div", { className: "entry-header" }, [
-      el("h3", { textContent: item.institution }),
-      el("span", { className: "entry-date", textContent: item.date })
-    ]),
-    el("p", { className: "entry-role", textContent: item.program }),
-    el("p", { className: "entry-location", textContent: item.location })
-  ])));
+function externalLink(label, url) {
+  return el("a", { href: url, target: "_blank", rel: "noopener noreferrer", textContent: label });
 }
 
-// Skills, contact links, footer
-$("#skillList").append(...Object.entries(SKILLS).map(([group, items]) =>
-  el("div", {}, [el("h3", { textContent: group }), el("ul", {}, items.map((i) => el("li", { textContent: i })))])));
-$("#links").append(...SITE.links.map((l) => el("a", { href: l.url, textContent: l.label, rel: "noopener" })));
-$("#summary").textContent = SITE.summary;
-$("#aboutText").textContent = SITE.about;
-$("#contactNote").textContent = SITE.contactNote;
-$(".mark").textContent = SITE.initials;
-$("footer p").replaceChildren("© ", el("span", { id: "year", textContent: new Date().getFullYear() }), ` ${SITE.name}`);
-$("#languageList").append(...LANGUAGES.map((language) =>
-  el("li", {}, [el("strong", { textContent: language.name }), ` - ${language.level}`])));
-$("#interestList").append(...INTERESTS.map((interest) => el("li", { textContent: interest })));
-renderFilters(); renderProjects(); renderExperience(); renderEducation();
+function renderEducation(content) {
+  $("#educationList").replaceChildren(...content.education.map((item) => {
+    const institution = item.institutionUrl
+      ? externalLink(item.institution, item.institutionUrl)
+      : item.institution;
+    const program = item.programUrl
+      ? externalLink(item.program, item.programUrl)
+      : item.program;
+    return el("article", { className: "entry" }, [
+      el("div", { className: "entry-header" }, [
+        el("h3", {}, [institution]),
+        el("span", { className: "entry-date", textContent: item.date })
+      ]),
+      el("p", { className: "entry-role" }, [program]),
+      el("p", { className: "entry-location", textContent: item.location })
+    ]);
+  }));
+}
 
-// One-time headline typing effect (skipped if reduced motion is on)
-const h1 = $("#typed");
-h1.setAttribute("aria-label", SITE.headline);
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const text = SITE.headline; let i = 0;
-  const caret = el("span", { className: "caret" });
-  caret.setAttribute("aria-hidden", "true");
-  h1.textContent = ""; h1.append(caret);
-  const t = setInterval(() => {
-    caret.before(text[i++]);
-    if (i >= text.length) { clearInterval(t); setTimeout(() => caret.remove(), 2500); }
-  }, 55);
-} else { h1.textContent = SITE.headline; }
+function renderPage() {
+  const content = CONTENT[language];
+  document.documentElement.lang = language;
+  document.title = content.title;
+  $("meta[name='description']").content = content.description;
+  $(".language-switch").setAttribute("aria-label", content.languageLabel);
+  $("nav").setAttribute("aria-label", content.navLabel);
+  $(".mark").setAttribute("aria-label", `${SITE.name}, ${language === "fr" ? "accueil" : "home"}`);
+  $("#typed").textContent = content.headline;
+  $("#typed").setAttribute("aria-label", content.headline);
+  const summary = $("#summary");
+  const polytechIndex = content.summary.indexOf(SITE.polytechName);
+  if (polytechIndex < 0) {
+    summary.textContent = content.summary;
+  } else {
+    summary.replaceChildren(
+      content.summary.slice(0, polytechIndex),
+      externalLink(SITE.polytechName, SITE.polytechUrl),
+      content.summary.slice(polytechIndex + SITE.polytechName.length)
+    );
+  }
+  $("#heroProjects").textContent = content.heroProjects;
+  $("#heroContact").textContent = content.heroContact;
+  $(".skip").textContent = content.skipLink;
+  $("#experienceNav").textContent = content.nav.experience;
+  $("#projectsNav").textContent = content.nav.projects;
+  $("#skillsNav").textContent = content.nav.skills;
+  $("#educationNav").textContent = content.nav.education;
+  $("#aboutNav").textContent = content.nav.about;
+  $("#contactNav").textContent = content.nav.contact;
+  $("#experienceTitle").textContent = content.sections.experience;
+  $("#projectsTitle").textContent = content.sections.projects;
+  $("#skillsTitle").textContent = content.sections.skills;
+  $("#aboutTitle").textContent = content.sections.about;
+  $("#aboutText").textContent = content.about;
+  $("#educationTitle").textContent = content.sections.education;
+  $("#languagesTitle").textContent = content.sections.languages;
+  $("#languageHeading").textContent = content.languageHeading;
+  $("#interestsHeading").textContent = content.interestsHeading;
+  $("#contactTitle").textContent = content.sections.contact;
+  $("#contactNote").textContent = content.contactNote;
+  $("#skillList").replaceChildren(...content.skills.map((group) => el("div", {}, [
+    el("h3", { textContent: group.title }),
+    el("ul", {}, group.items.map((item) => el("li", { textContent: item })))
+  ])));
+  $("#links").replaceChildren(...SITE.links.map((link) =>
+    el("a", { href: link.url, textContent: content.contactLinks[link.key] })));
+  $("#languageList").replaceChildren(...content.languages.map((item) =>
+    el("li", {}, [el("strong", { textContent: item.name }), ` - ${item.level}`])));
+  $("#interestList").replaceChildren(...content.interests.map((item) => el("li", { textContent: item })));
+  $("footer p").replaceChildren("© ", el("span", { textContent: new Date().getFullYear() }), ` ${SITE.name}`);
+  $("[data-language='en']").setAttribute("aria-pressed", language === "en");
+  $("[data-language='fr']").setAttribute("aria-pressed", language === "fr");
+  renderFilters(content);
+  renderProjects(content);
+  renderExperience(content);
+  renderEducation(content);
+}
+
+document.querySelectorAll("[data-language]").forEach((button) => {
+  button.addEventListener("click", () => {
+    language = button.dataset.language;
+    try {
+      localStorage.setItem("portfolio-language", language);
+    } catch {}
+    renderPage();
+  });
+});
+
+renderPage();

@@ -30,6 +30,9 @@ function renderDetail() {
   $("meta[name='description']").content = content.description;
   $("#detailBack").textContent = content.detailBack;
   $("#detailBack").setAttribute("aria-label", content.detailBack);
+  $("#detailDetailsTitle").textContent = content.detailDetailsTitle;
+  $("#detailHighlightsTitle").textContent = content.detailHighlightsTitle;
+  $("#detailResourcesTitle").textContent = content.detailResourcesTitle;
   $(".language-switch").setAttribute("aria-label", content.languageLabel);
   $("[data-language='en']").setAttribute("aria-pressed", language === "en");
   $("[data-language='fr']").setAttribute("aria-pressed", language === "fr");
@@ -85,10 +88,12 @@ function renderDetail() {
   locationText.hidden = !item.location;
   details.replaceChildren(...(item.details || []).map((text) => make("li", { textContent: text })));
   details.hidden = !item.details?.length;
+  $("#detailDetailsSection").hidden = !item.details?.length;
   const highlights = item.highlights || [];
   $("#detailHighlightsTitle").hidden = !highlights.length;
   $("#detailHighlights").replaceChildren(...highlights.map((text) => make("li", { textContent: text })));
   $("#detailHighlights").hidden = !highlights.length;
+  $("#detailHighlightsSection").hidden = !highlights.length;
   resources.replaceChildren(...(item.resources || []).map((resource) => {
     if (resource.type === "image") {
       return make("figure", { className: "detail-figure" }, [
@@ -100,6 +105,7 @@ function renderDetail() {
     }
     return externalLink(resource.label, resource.href);
   }));
+  $("#detailResourcesSection").hidden = !item.resources?.length;
 }
 
 document.querySelectorAll("[data-language]").forEach((button) => {

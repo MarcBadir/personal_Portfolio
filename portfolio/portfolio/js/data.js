@@ -18,6 +18,10 @@ const CONTENT = {
       eyebrow: "Embedded systems · Firmware · Interfaces",
       explore: "Explore more",
       contact: "Get in touch",
+      carouselTitle: "Recent work",
+      carouselLabel: "Recent experience and project work",
+      focusLabel: "In focus",
+      viewDetails: "View details",
       widgetsTitle: "Explore the portfolio",
       widgetsNote: "Choose a section to explore its projects, experience, and details.",
       widgets: [
@@ -35,6 +39,9 @@ const CONTENT = {
     backToIntro: "Quick intro",
     cvLabel: "Open bilingual CV (PDF)",
     detailBack: "Back to CV",
+    detailDetailsTitle: "What I worked on",
+    detailHighlightsTitle: "Highlights",
+    detailResourcesTitle: "Media and resources",
     notFoundTitle: "This CV entry could not be found.",
     programLinkLabel: "Visit the program page",
     communityImage: {
@@ -85,7 +92,7 @@ const CONTENT = {
         company: "STMicroelectronics TouchGFX",
         companyUrl: "https://www.linkedin.com/company/stmicroelectronics/",
         role: "Graphical User Interface Development Intern",
-        date: "Two-month internship · 2026",
+        date: "April - July 2026",
         location: "Aarhus, Denmark",
         details: [
           "Developed GUI demonstrations for MCU-based products using TouchGFX.",
@@ -233,6 +240,10 @@ const CONTENT = {
       eyebrow: "Systèmes embarqués · Firmware · Interfaces",
       explore: "Découvrir la suite",
       contact: "Me contacter",
+      carouselTitle: "Activités récentes",
+      carouselLabel: "Expériences et projets récents",
+      focusLabel: "À retenir",
+      viewDetails: "Voir les détails",
       widgetsTitle: "Explorer le portfolio",
       widgetsNote: "Choisissez une rubrique pour découvrir les projets, expériences et informations associés.",
       widgets: [
@@ -250,6 +261,9 @@ const CONTENT = {
     backToIntro: "Accueil",
     cvLabel: "Ouvrir le CV bilingue (PDF)",
     detailBack: "Retour au CV",
+    detailDetailsTitle: "Travail réalisé",
+    detailHighlightsTitle: "Points clés",
+    detailResourcesTitle: "Médias et ressources",
     notFoundTitle: "Cette rubrique du CV est introuvable.",
     programLinkLabel: "Consulter la formation",
     communityImage: {
@@ -300,7 +314,7 @@ const CONTENT = {
         company: "STMicroelectronics TouchGFX",
         companyUrl: "https://www.linkedin.com/company/stmicroelectronics/",
         role: "Stagiaire en développement d'interfaces graphiques",
-        date: "Stage de deux mois · 2026",
+        date: "Avril - juillet 2026",
         location: "Aarhus, Danemark",
         details: [
           "Développement de démonstrateurs d'interfaces graphiques pour microcontrôleurs avec TouchGFX.",

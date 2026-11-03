@@ -13,15 +13,32 @@
 </head>
 <body class="cv-page">
   <header class="cv-masthead">
-    <a class="mark" id="cvLogo" href="index.html" aria-label="Marc Bishara, home">MB</a>
-    <div class="cv-identity">
-      <p id="cvHeadline" class="cv-headline"></p>
-      <h1 id="cvName">Marc Bishara</h1>
-      <p id="cvSummary" class="cv-summary"></p>
+    <div class="cv-topbar">
+      <a class="mark" id="cvLogo" href="index.html" aria-label="Marc Bishara, home">MB</a>
+      <div class="language-switch" role="group" aria-label="Language">
+        <button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button>
+        <button type="button" data-language="fr" aria-pressed="false" aria-label="Français">FR</button>
+      </div>
     </div>
-    <div class="language-switch" role="group" aria-label="Language">
-      <button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button>
-      <button type="button" data-language="fr" aria-pressed="false" aria-label="Français">FR</button>
+    <div class="cv-hero">
+      <div class="cv-identity">
+        <p id="cvHeadline" class="cv-headline"></p>
+        <h1 id="cvName">Marc Bishara</h1>
+        <p id="cvSummary" class="cv-summary"></p>
+        <div class="cv-hero-actions">
+          <a id="cvHeroContact" class="btn" href="mailto:marcbadir75@gmail.com">Get in touch</a>
+          <a id="cvHeroProjects" class="btn ghost" href="#cvProjects">Explore my projects</a>
+          <a id="cvPdf" class="cv-hero-pdf" href="assets/French%20%26%20English%20CV.pdf" target="_blank" rel="noopener noreferrer">Open bilingual CV (PDF)</a>
+        </div>
+      </div>
+      <section id="cvShowcase" class="cv-showcase" aria-labelledby="cvShowcaseTitle">
+        <div class="cv-showcase-top">
+          <h2 id="cvShowcaseTitle">Recent work</h2>
+        </div>
+        <div id="cvShowcaseViewport" class="cv-showcase-viewport" tabindex="0" aria-label="Swipe through recent work">
+          <div id="cvShowcaseTrack" class="cv-showcase-track"></div>
+        </div>
+      </section>
     </div>
   </header>
 
@@ -29,7 +46,6 @@
     <section class="cv-contact" aria-labelledby="cvContactTitle">
       <h2 id="cvContactTitle">Contact</h2>
       <div id="cvContacts" class="cv-contact-links"></div>
-      <a id="cvPdf" class="cv-pdf" href="assets/French%20%26%20English%20CV.pdf" target="_blank" rel="noopener noreferrer">Open bilingual CV (PDF)</a>
     </section>
     <div class="cv-layout">
       <aside class="cv-sidebar">
@@ -54,7 +70,7 @@
           <h2 id="experienceTitle">Experience</h2>
           <div id="experienceList" class="cv-entry-list"></div>
         </section>
-        <section class="cv-section" aria-labelledby="projectsTitle">
+        <section id="cvProjects" class="cv-section" aria-labelledby="projectsTitle">
           <h2 id="projectsTitle">Projects</h2>
           <div id="projectsList" class="cv-entry-list"></div>
         </section>
@@ -70,7 +86,10 @@
     </div>
   </main>
 
-  <footer><p id="cvFooter">© 2026 Marc Bishara</p></footer>
+  <footer class="cv-footer">
+    <p id="cvFooter">© 2026 Marc Bishara</p>
+    <nav id="cvFooterContacts" class="cv-footer-contact" aria-label="Contact"></nav>
+  </footer>
   <script src="js/data.js"></script>
   <script src="js/cv.js"></script>
 </body>

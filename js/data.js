@@ -79,6 +79,7 @@ const CONTENT = {
       {
         company: "STMicroelectronics",
         companyUrl: "https://www.linkedin.com/company/stmicroelectronics/",
+        logo: "assets/ProfessionalExperience/STMicroelectronics/ST-logo-2026-quantum.svg",
         role: "Application Engineer Apprentice",
         date: "September 2024 - Present",
         details: [
@@ -91,6 +92,7 @@ const CONTENT = {
       {
         company: "STMicroelectronics TouchGFX",
         companyUrl: "https://www.linkedin.com/company/stmicroelectronics/",
+        logo: "assets/ProfessionalExperience/STMicroelectronics/ST-logo-2026-quantum.svg",
         role: "Graphical User Interface Development Intern",
         date: "April - July 2026",
         location: "Aarhus, Denmark",
@@ -102,6 +104,7 @@ const CONTENT = {
       },
       {
         company: "Orange Business",
+        logo: "assets/ProfessionalExperience/OrangeBusiness/orange-logo.svg",
         role: "Intern",
         date: "July - August 2023",
         details: [
@@ -125,6 +128,7 @@ const CONTENT = {
       },
       {
         company: "MSD",
+        logo: "assets/ProfessionalExperience/MSD/international-logo.svg",
         role: "Marketing Intern",
         date: "April 2019 · 1 month",
         location: "Cairo, Egypt",
@@ -301,6 +305,7 @@ const CONTENT = {
       {
         company: "STMicroelectronics",
         companyUrl: "https://www.linkedin.com/company/stmicroelectronics/",
+        logo: "assets/ProfessionalExperience/STMicroelectronics/ST-logo-2026-quantum.svg",
         role: "Apprenti ingénieur d'application",
         date: "Septembre 2024 - Aujourd'hui",
         details: [
@@ -313,6 +318,7 @@ const CONTENT = {
       {
         company: "STMicroelectronics TouchGFX",
         companyUrl: "https://www.linkedin.com/company/stmicroelectronics/",
+        logo: "assets/ProfessionalExperience/STMicroelectronics/ST-logo-2026-quantum.svg",
         role: "Stagiaire en développement d'interfaces graphiques",
         date: "Avril - juillet 2026",
         location: "Aarhus, Danemark",
@@ -324,6 +330,7 @@ const CONTENT = {
       },
       {
         company: "Orange Business",
+        logo: "assets/ProfessionalExperience/OrangeBusiness/orange-logo.svg",
         role: "Stagiaire",
         date: "Juillet - août 2023",
         details: [
@@ -347,6 +354,7 @@ const CONTENT = {
       },
       {
         company: "MSD",
+        logo: "assets/ProfessionalExperience/MSD/international-logo.svg",
         role: "Stagiaire en marketing",
         date: "Avril 2019 · 1 mois",
         location: "Le Caire, Égypte",

@@ -69,7 +69,7 @@ try {
   language = localStorage.getItem("portfolio-language") === "fr" ? "fr" : "en";
 } catch {}
 
-function detailEntry(type, item, index, title, subtitle, date, markName = null) {
+function detailEntry(type, item, index, title, subtitle, date, markName = null, logo = null) {
   const link = make("a", {
     className: markName ? "cv-entry cv-entry-with-mark" : "cv-entry",
     href: `portfolio.html?type=${type}&index=${index}`,
@@ -78,8 +78,13 @@ function detailEntry(type, item, index, title, subtitle, date, markName = null) 
   if (markName) {
     link.append(make("span", { className: "cv-entry-mark", "aria-hidden": "true" }, [icon(markName)]));
   }
+  const heading = make("h3", { textContent: title });
+  if (logo) {
+    heading.classList.add("cv-entry-title-with-logo");
+    heading.prepend(make("img", { className: "cv-company-logo", src: logo, alt: "", loading: "lazy" }));
+  }
   link.append(make("div", { className: "cv-entry-copy" }, [
-    make("h3", { textContent: title }),
+    heading,
     make("p", { textContent: subtitle })
   ]));
   link.append(make("span", { className: "cv-entry-date", textContent: date }));
@@ -141,9 +146,19 @@ function renderShowcase(content) {
       href: `portfolio.html?type=${type}&index=${index}`,
       draggable: false
     });
+    const slideTitle = make("h3", { id: `cvSlideTitle${slideIndex}` });
+    if (type === "experience" && item.logo) {
+      slideTitle.classList.add("cv-slide-title-with-logo");
+      slideTitle.append(
+        make("img", { className: "cv-company-logo", src: item.logo, alt: "" }),
+        make("span", { textContent: title })
+      );
+    } else {
+      slideTitle.textContent = title;
+    }
     const copy = make("div", { className: "cv-slide-copy" }, [
       make("p", { className: "cv-slide-category", textContent: content.sections[type] }),
-      make("h3", { id: `cvSlideTitle${slideIndex}`, textContent: title }),
+      slideTitle,
       make("p", {
         className: "cv-slide-meta",
         textContent: [item.role, item.date, item.location].filter(Boolean).join(" · ")
@@ -247,7 +262,7 @@ function renderCv() {
   })));
   $("#experienceTitle").textContent = content.sections.experience;
   $("#experienceList").replaceChildren(...content.experience.map((item, index) =>
-    detailEntry("experience", item, index, item.company, item.role, item.date)));
+    detailEntry("experience", item, index, item.company, item.role, item.date, null, item.logo)));
   $("#projectsTitle").textContent = content.sections.projects;
   $("#projectsList").replaceChildren(...content.projects.map((item, index) =>
     detailEntry("projects", item, index, item.title, item.description, item.date)));

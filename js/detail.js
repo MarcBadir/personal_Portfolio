@@ -58,7 +58,11 @@ function renderDetail() {
   notFound.hidden = true;
   $("#detailCategory").textContent = content.sections[type];
   if (type === "experience") {
-    heading.replaceChildren(item.companyUrl ? externalLink(item.company, item.companyUrl) : item.company);
+    heading.classList.toggle("detail-title-with-logo", Boolean(item.logo));
+    heading.replaceChildren(
+      ...(item.logo ? [make("img", { className: "detail-company-logo", src: item.logo, alt: "" })] : []),
+      item.companyUrl ? externalLink(item.company, item.companyUrl) : document.createTextNode(item.company)
+    );
     subtitle.textContent = item.role;
     subtitle.hidden = false;
     description.hidden = true;

@@ -111,7 +111,7 @@ function canRotateShowcase() {
 function startShowcaseRotation() {
   stopShowcaseRotation();
   if (!canRotateShowcase()) return;
-  showcaseTimer = window.setInterval(moveShowcase, 3000);
+  showcaseTimer = window.setInterval(moveShowcase, 2000);
 }
 
 function cloneShowcaseSlide(slide) {
@@ -136,7 +136,11 @@ function renderShowcase(content) {
     const image = item.resources?.find((resource) => resource.type === "image");
     const title = type === "experience" ? item.company : item.title;
     const focus = item.details?.[0] || item.description;
-    const slide = make("article", { className: "cv-showcase-slide" });
+    const slide = make("a", {
+      className: "cv-showcase-slide",
+      href: `portfolio.html?type=${type}&index=${index}`,
+      draggable: false
+    });
     const copy = make("div", { className: "cv-slide-copy" }, [
       make("p", { className: "cv-slide-category", textContent: content.sections[type] }),
       make("h3", { id: `cvSlideTitle${slideIndex}`, textContent: title }),
@@ -144,11 +148,7 @@ function renderShowcase(content) {
         className: "cv-slide-meta",
         textContent: [item.role, item.date, item.location].filter(Boolean).join(" · ")
       }),
-      make("a", {
-        className: "cv-slide-link",
-        href: `portfolio.html?type=${type}&index=${index}`,
-        textContent: content.intro.viewDetails
-      })
+      make("span", { className: "cv-slide-link", textContent: content.intro.viewDetails })
     ]);
     const visual = image
       ? make("img", { className: "cv-slide-image", src: image.src, alt: image.alt, loading: "lazy", draggable: false })

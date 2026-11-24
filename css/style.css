@@ -2,7 +2,7 @@
   --bg:#eef1f5; --surface:#fff; --ink:#14213d; --muted:#55607a; --line:#cfd6e2;
   --accent:#2f4bff; --accent-ink:#fff; --mint:#c4ebd8;
   --head:"Bricolage Grotesque",system-ui,sans-serif;
-  --body:"Newsreader",Georgia,serif;
+  --body:"Noto Sans Mongolian",system-ui,sans-serif;
 }
 @media (prefers-color-scheme:dark){
   :root{--bg:#0f1524;--surface:#18203a;--ink:#eaeefb;--muted:#9aa6c6;--line:#2c3657;--accent:#7f95ff;--accent-ink:#0f1524;--mint:#1e4a3a}
